@@ -1,13 +1,10 @@
-# PSNDL
+<div align="center">
 
-Playstation Network Package [Search engine](http://yne.github.io/psndl)
-and [PKGi-PS3](https://github.com/bucanero/pkgi-ps3) databases at <https://yne.fr/psndl/config.txt>
+# PlayStation Network Database
+Custom game update checker with homebrew support for PS3™ 4K Pro.
 
-Current dataset was aggragated from
+![image](https://github.com/user-attachments/assets/8e4000d3-b68c-4192-84e9-ce1788e922de)
 
-- [Repo_Hub](https://github.com/romjacket/Repo_Hub),
-- [psndl.net](https://psndl.net/packages/database)
-- [nopaystation](https://nopaystation.com/)
-
-With [user submission](https://github.com/yne/psndl/issues/new/choose) support
-
+ # Credits
+ @yne and [NoPayStation](https://nopaystation.com/) database.
+</div>
