@@ -7,9 +7,7 @@
     javascript:window.resizeTo(screen.width, screen.height);
 </script>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
-
-    html,
+   html,
     body {
         margin: 0;
         padding: 0;
@@ -17,38 +15,31 @@
         background: url("background.png") no-repeat center center fixed;
         background-size: cover;
         color: #fff;
-        font-family: 'Roboto Condensed', Arial, sans-serif;
+         font-family: Arial, sans-serif;
         text-align: center;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
     }
 
     header {
-        padding: 12px 20px 8px 20px;
-        background: rgba(0, 0, 0, 0.75);
+        padding: 10px 15px;
+        background: rgba(0, 0, 0, 0.6);
         text-align: center;
-        font-size: 14px;
-        font-weight: 600;
-        border-bottom: 2px solid #0091ea;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-        user-select: none;
-        position: relative;
+        font-size: 12px;
+        font-weight: bold;
+        border-bottom: 2px solid #888;
+        display: block;
     }
 
     header a {
         font-size: 3.2em;
-        color: #0091ea;
+        color: #ffffff;
         text-decoration: none;
-        font-weight: 700;
+        font-weight: bold;
         display: block;
         letter-spacing: 0.1em;
-        text-shadow: 0 0 6px #00aaff, 0 0 10px #004488;
-        transition: color 0.3s ease;
     }
 
     header a:hover {
         color: #66ccff;
-        text-shadow: 0 0 10px #66ccff, 0 0 15px #3388cc;
     }
 
     #count {
@@ -60,61 +51,37 @@
     }
 
     form {
-        margin: 12px auto 0 auto;
+         margin: 10px auto;
     }
 
     input[type="search"],
     input[type="submit"],
     input[type="button"] {
         font-size: 1.2em;
-        padding: 8px 14px;
-        margin: 6px 8px 6px 0;
+        padding: 6px 10px;
+        margin: 5px;
         background: rgba(0, 0, 0, 0.6);
-        border: 1px solid #0091ea;
-        color: #66ccff;
+        border: 1px solid #aaa;
+        color: #fff;
         border-radius: 5px;
-        font-weight: 600;
-        transition: background-color 0.3s ease;
     }
 
     input[type="search"] {
-        width: 280px;
-        color: #66ccff;
-    }
-
-    input[type="search"]::placeholder {
-        color: #335577;
-        font-weight: 400;
-    }
-
-    input[type="submit"]:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    input[type="submit"]:not(:disabled):hover,
-    input[type="button"]:hover {
-        background: rgba(0, 145, 234, 0.9);
-        border-color: #66ccff;
-        color: #ffffff;
-        cursor: pointer;
+        width: 250px;
     }
 
     button {
         margin: 2px;
         background: rgba(0, 0, 0, 0.6);
-        border: 1px solid #0091ea;
-        color: #66ccff;
+        border: 1px solid #aaa;
+        color: #fff;
         border-radius: 4px;
         font-size: 1em;
-        padding: 4px 8px;
-        font-weight: 600;
-        transition: background-color 0.3s ease;
+        padding: 3px 6px;
     }
 
     button:hover {
-        background: rgba(0, 145, 234, 0.9);
-        cursor: pointer;
+        background: rgba(255, 255, 255, 0.1);
     }
 
     #main.table {
@@ -131,12 +98,11 @@
 
     .sidebar {
         width: 80px;
-        background: rgba(0, 0, 0, 0.75);
+        background: rgba(0, 0, 0, 0.6);
         padding: 20px 5px;
         box-sizing: border-box;
-        border-right: 2px solid #0091ea;
-        user-select: none;
-    }
+		border-right: 2px solid #888;
+	}
 
     .sidebar ul {
         list-style: none;
@@ -145,22 +111,18 @@
     }
 
     .sidebar ul li {
-        margin: 8px 0;
+        margin: 5px 0;
     }
 
     .sidebar ul li a {
         text-decoration: none;
-        font-size: 1.3em;
+        font-size: 1.2em;
         display: block;
-        color: #66ccff;
-        text-shadow: 0 0 3px #003366;
-        font-weight: 700;
-        transition: color 0.25s ease;
-    }
+        color: #ffffff;
+	}
 
     .sidebar ul li a:hover {
-        color: #0091ea;
-        text-shadow: 0 0 5px #00aaff;
+        color: #ffff00;
     }
 
     .sidebar ul li a:active {
@@ -172,14 +134,12 @@
         margin-top: 20px;
     }
 
-    #letters a {
+     #letters a {
         width: 100%;
         text-align: center;
-        margin: 4px 0;
+        margin: 2px 0;
         display: block;
-        color: #66ccff;
-        font-weight: 700;
-        user-select: none;
+        color: #ffffff;
     }
 
     #letters a:hover {
@@ -188,31 +148,25 @@
     }
 
     #letters a:active {
-        color: #004488 !important;
-        text-shadow: none !important;
+        color: #0000ff !important;
     }
 
-    .content {
-        padding: 10px;
-        text-align: center;
-        overflow-y: auto;
-        max-height: calc(100vh - 120px);
-    }
+   .content {
+		padding: 10px;
+		text-align: center;
+	}
 
-    ul#list {
-        list-style: none;
-        padding: 10px 20px;
-        margin: 0 auto;
-        display: inline-block;
-        text-align: left;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
-        white-space: nowrap;
-        min-width: 600px;
-        max-width: 95vw;
-        max-height: 100%;
-        overflow-y: auto;
-    }
+	ul#list {
+		list-style: none;
+		padding: 10px 20px;
+		margin: 0 auto;
+		display: inline-block;
+		text-align: left;
+		background: rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
+		white-space: nowrap;
+		min-width: 600px;
+	}
 
     ul#list li {
         padding: 8px 10px;
@@ -221,27 +175,21 @@
         font-size: 1.1em;
     }
 
-    ul#list li a {
-        text-decoration: none;
-        color: #66ccff;
-        transition: color 0.3s ease;
+    color: #fff;
     }
 
     ul#list li a:hover {
-        text-decoration: underline;
-        color: #0091ea;
+		color: #66ccff;
     }
 
     [download] {
-        background: #66ccff;
+        background: #fff;
         color: #000 !important;
         padding: 2px 6px;
         margin-left: 10px;
         text-decoration: none;
         border-radius: 3px;
         font-size: 0.9em;
-        font-weight: 700;
-        box-shadow: 0 0 5px #3399ffaa;
     }
 
     #icon {
