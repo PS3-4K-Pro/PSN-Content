@@ -1,203 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no">
-<title>PSNDL</title>
-<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-<style>
-	body {
-		background: url("background.png") no-repeat center center fixed;
-		background-size: cover;
-		margin: 0;
-		padding: 0;
-		font-family: Arial, sans-serif;
-		color: #fff;
-		text-align: center;
-	}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>PSNDL</title>
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <style>
+    body {
+      background: url("background.png") no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
 
-	header {
-		width: 90%;
-		max-width: 820px;
-		margin: 20px auto 10px auto;
-		padding: 15px 10px;
-		background: rgba(0, 0, 0, 0.6); /* Compatível com PS3 */
-		border-radius: 8px;
-		border: 1px solid #333;
-	}
+    header {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-	header a {
-		font-size: 2em;
-		color: #4aaaff;
-		text-decoration: none;
-		font-weight: bold;
-		display: block;
-		margin-bottom: 10px;
-	}
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
 
-	header a:hover {
-		color: #77cfff;
-	}
+    input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      width: 220px;
+    }
 
-	form {
-		margin: 10px auto;
-	}
+    button {
+      padding: 8px 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #0070d1;
+      color: white;
+      cursor: pointer;
+    }
 
-	input[type="search"],
-	input[type="submit"],
-	input[type="button"] {
-		font-size: 1em;
-		padding: 6px 10px;
-		margin: 4px 2px;
-		background: #111;
-		border: 1px solid #666;
-		color: #fff;
-		border-radius: 6px;
-	}
+    button:hover {
+      background-color: #0055a5;
+    }
 
-	input[type="search"] {
-		width: 230px;
-	}
+    .results {
+      margin: 20px auto;
+      width: 90%;
+      max-width: 1000px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
 
-	button {
-		background: #222;
-		border: 1px solid #555;
-		color: #fff;
-		font-size: 0.9em;
-		padding: 4px 6px;
-		margin: 2px 1px;
-		border-radius: 5px;
-	}
+    .game-entry {
+      border-bottom: 1px solid #444;
+      padding: 6px 0;
+    }
 
-	button:hover {
-		background: #333;
-	}
+    .game-entry:last-child {
+      border-bottom: none;
+    }
 
-	#letters {
-		margin: 10px 0 0;
-	}
+    .title {
+      font-weight: bold;
+      color: #7dc3ff;
+    }
 
-	ul#list {
-		list-style: none;
-		padding: 10px;
-		margin: 0 auto 25px auto;
-		width: 90%;
-		max-width: 820px;
-		background: rgba(0, 0, 0, 0.6);
-		border-radius: 8px;
-		border: 1px solid #333;
-		text-align: left;
-	}
-
-	ul#list li {
-		padding: 8px 10px;
-		border-bottom: 1px solid #333;
-		font-size: 14px;
-	}
-
-	ul#list li a {
-		color: #4aaaff;
-		text-decoration: none;
-	}
-
-	ul#list li a:hover {
-		text-decoration: underline;
-	}
-
-	[download] {
-		background: #fff;
-		color: #000 !important;
-		padding: 2px 6px;
-		margin-left: 10px;
-		border-radius: 3px;
-		font-size: 0.85em;
-		text-decoration: none;
-	}
-</style>
-
-
+    .id {
+      font-family: monospace;
+    }
+  </style>
+</head>
 <body>
-	<header>
-		<a href="">PlayStation® Network Download List</a>
-		<form name="engine" onsubmit="location.hash=query.value;render();return false">
-			<input type="search" name="query" size="25" placeholder="Search">
-			<input type="submit" name="send" value="Search" disabled>
-			<input type="button" name="fetch" value="Reload DB" onclick="fetchDB()">
-			<ul id="letters"><button type="button" onclick="location.hash='^'+this.innerHTML;render()">[0-9]</button></ul>
-		</form>
-	</header>
 
-	<ul id="list"></ul>
-	<script>
-		function sort(lines, algo) {
-			for (var i = 0; i < lines.length; i++) {
-				for (var j = 0; j < lines.length - i - 1; j++) {
-					if (algo(lines[j], lines[j + 1])) {
-						var temp = lines[j];
-						lines[j] = lines[j + 1];
-						lines[j + 1] = temp;
-					}
-				}
-			}
-			return lines;
-		}
-		try {
-			var f = document.forms.engine;
-			var DB = window.localStorage ? JSON.parse(localStorage.DB || '[]') : [];
+  <header>
+    <h1>PlayStation® Network Downloader</h1>
+  </header>
 
-			function makeRap(row) {
-				var hex = row[4];
-				if (!hex) return "";
-				if (hex == 0) return '<span>press Circle in ReactPSN</span>';
-				return '<a download="' + row[1] + '-' + row[0] + '_00-' + hex + '.rap" href="' + hex + '.rap">RAP</a>';
-			}
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search game title or ID">
+    <button id="search-button">Search</button>
+    <button id="reload-db">Reload DB</button>
+  </div>
 
-			function fetchDB() {
-				f.fetch.disabled = true;
-				var xhr = new XMLHttpRequest();
-				xhr.onabort = xhr.ontimeout = xhr.onerror = alert;
-				xhr.onload = function () {
-					if (xhr.status != 200) return alert(xhr.status);
-					DB = xhr.responseText.split("\n");
-					for (var i = 0; i < DB.length; i++) DB[i] = DB[i].split(",");
-					if (window.localStorage) { localStorage.DB = JSON.stringify(DB); }
-					f.fetch.disabled = false;
-					render();
-				};
-				xhr.open('GET', 'db.csv');
-				xhr.send();
-			}
+  <div class="results" id="results">
+    Loading database...
+  </div>
 
-			function render() {
-				f.fetch.type = window.localStorage ? 'button' : 'hidden';
-				f.send.disabled = DB.length == 0;
-				f.query.placeholder = DB.length + " URL loaded";
-				var query = decodeURIComponent(location.hash.replace(/^#+/, ''));
-				var startsWith = query.length && query[0] == '^';
-				var rule = new RegExp(query, 'i');
-				var matches = [];
-				for (var i = 0; i < DB.length && matches.length < (startsWith ? 999 : 99); i++) {
-					if (DB[i][5].match(rule) || (DB[i][0] == query))
-						matches.push(DB[i]);
-				}
-				sort(matches, function (a, b) { return a[5] > b[5]; });
-				for (var i = 0; i < matches.length; i++) {
-					var a = matches[i];
-					matches[i] = '<li><a href="http://zeus.dl.playstation.net/cdn/' + a[1] + '/' + a[0] + '_00/' + a[2] + '.pkg">' + a[5] + ' ' + (a[3]) + ' [' + a[0] + "]</a> " + makeRap(a) + "</li>";
-				}
-				document.getElementById('list').innerHTML = matches.join('');
-			};
+  <script>
+    let db = [];
 
-			var buttons = '';
-			for (var c = 65; c < 91; c++) {
-				buttons += '<button type="button" onclick="location.hash=\'^\'+this.innerHTML;render()">' + String.fromCharCode(c) + '</button>';
-			}
-			document.getElementById("letters").innerHTML += buttons;
-			f.query.value = location.hash.replace(/^#+/, '');
-			render();
-			if (!DB.length) {
-				fetchDB()
-			}
-		} catch (a) { alert(a) }
-	</script>
+    async function loadDatabase() {
+      try {
+        const res = await fetch("database.json");
+        db = await res.json();
+        document.getElementById("results").innerHTML = `<b>✔ Loaded ${db.length} games</b>`;
+        displayResults(db);
+      } catch (e) {
+        document.getElementById("results").innerText = "Failed to load database.";
+      }
+    }
+
+    function displayResults(games) {
+      const container = document.getElementById("results");
+      container.innerHTML = "";
+      games.forEach(game => {
+        const div = document.createElement("div");
+        div.className = "game-entry";
+        div.innerHTML = `
+          <div class="title">${game.title}</div>
+          <div class="id">${game.id}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    document.getElementById("search-button").addEventListener("click", () => {
+      const query = document.getElementById("search").value.toLowerCase();
+      const filtered = db.filter(g => g.title.toLowerCase().includes(query) || g.id.toLowerCase().includes(query));
+      displayResults(filtered);
+    });
+
+    document.getElementById("reload-db").addEventListener("click", loadDatabase);
+
+    // Auto-load on start
+    loadDatabase();
+  </script>
+
 </body>
 </html>
