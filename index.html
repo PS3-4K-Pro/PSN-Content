@@ -16,8 +16,13 @@
 	}
 
 	header {
-		margin: 20px 0 10px;
-	}
+      padding: 10px 15px;
+      background: rgba(0, 0, 0, 0.6);
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      border-bottom: 2px solid #888;
+    }
 
 	header a {
 		font-size: 3em;
@@ -86,7 +91,6 @@
 	}
 
 	ul#list li a {
-		color: #66b2ff;
 		text-decoration: none;
 	}
 
@@ -113,7 +117,7 @@
 
 <body>
 	<header>
-		<a href="https://github.com/yne/psndl">PSNDL</a>
+		<a href="">PlayStation® Network Download List</a>
 		<form name="engine" onsubmit="location.hash=query.value;render();return false">
 			<input type="search" name="query" size="25" placeholder="Search">
 			<input type="submit" name="send" value="Search" disabled>
