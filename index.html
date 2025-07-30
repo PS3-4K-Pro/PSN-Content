@@ -7,7 +7,7 @@
     javascript:window.resizeTo(screen.width,screen.height)
 </script>
 <style>
-    hhtml, body {
+    html, body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -16,191 +16,191 @@
     color: #fff;
     font-family: Arial, sans-serif;
     text-align: center;
-}
+	}
+	
+	header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 120px;
+		padding: 10px 15px;
+		background: rgba(0, 0, 0, 0.6);
+		text-align: center;
+		font-size: 12px;
+		font-weight: bold;
+		border-bottom: 2px solid #888;
+		display: block;
+		z-index: 2; /* abaixo da sidebar */
+	}
 
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 120px;
-    padding: 10px 15px;
-    background: rgba(0, 0, 0, 0.6);
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    border-bottom: 2px solid #888;
-    display: block;
-    z-index: 2; /* abaixo da sidebar */
-}
+	header a {
+		font-size: 3em;
+		color: #ffffff;
+		text-decoration: none;
+		font-weight: bold;
+		display: block;
+	}
 
-header a {
-    font-size: 3em;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-}
-
-header a:hover {
-    color: #66ccff;
-}
-
-form {
-    margin: 10px auto;
-}
-
-input[type="search"],
-input[type="submit"],
-input[type="button"] {
-    font-size: 1.2em;
-    padding: 6px 10px;
-    margin: 5px;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid #aaa;
-    color: #fff;
-    border-radius: 5px;
-}
-
-input[type="search"] {
-    width: 250px;
-}
-
-button {
-    margin: 2px;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid #aaa;
-    color: #fff;
-    border-radius: 4px;
-    font-size: 1em;
-    padding: 3px 6px;
-}
-
-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-#main.table {
-    display: table;
-    width: 100%;
-    height: 100%;
-    table-layout: fixed;
-}
-
-.table-cell {
-    display: table-cell;
-    vertical-align: top;
-}
-
-.sidebar {
-    position: fixed;
-    top: 140px;
-    bottom: 0;
-    left: 0;
-    width: 80px;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 0 5px 5px 5px;
-    box-sizing: border-box;
-    border-right: 2px solid #888;
-    z-index: 3; /* acima do header */
-}
-
-.sidebar-top-border {
-    position: fixed;
-    top: 142px;
-    bottom: 0;
-    left: 5px;
-    width: 80px;
-    height: 2px;
-    background: rgba(0, 8, 30, 1);
-    margin-top: -2px;
-    margin-left: -7px;
-    z-index: 4; /* acima da sidebar */
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar ul li {
-    margin: 5px 0;
-}
-
-.sidebar ul li a {
-    text-decoration: none;
-    font-size: 1.2em;
-    display: block;
-    color: #ffffff;
-}
-
-.sidebar ul li a:hover {
-    color: #ffff00;
-}
-
-.sidebar ul li a:active {
-    color: #0000ff;
-}
-
-#letters {
-    margin-top: 40px;
-}
-
-#letters a {
-    width: 100%;
-    text-align: center;
-    margin: 2px 0;
-    display: block;
-    color: #ffffff;
-}
-
-#letters a:hover {
-    color: #ffff00 !important;
-}
-
-#letters a:active {
-    color: #0000ff !important;
-}
-
-.content {
-    padding: 10px;
-    text-align: center;
-}
-
-ul#list {
-    position: relative;
-    top: 150px;
-    width: max-content;
-    left: -400px;
-    list-style: none;
-    padding: 10px 20px;
-    margin: 0 auto;
-    display: inline-block;
-    text-align: left;
-    font-size: 1.0em;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    white-space: nowrap;
-    min-width: 400px;
-    z-index: 1; /* acima apenas do fundo */
-}
-
-ul#list li {
-    padding: 8px 10px;
-    border-bottom: 1px solid #333;
-}
-
-ul#list li a {
-    text-decoration: none;
-    color: #fff;
-}
-
-ul#list li a:hover {
-    text-decoration: underline;
-    color: #66ccf
-
+	header a:hover {
+		color: #66ccff;
+	}
+	
+	form {
+		margin: 10px auto;
+	}
+	
+	input[type="search"],
+	input[type="submit"],
+	input[type="button"] {
+		font-size: 1.2em;
+		padding: 6px 10px;
+		margin: 5px;
+		background: rgba(0, 0, 0, 0.6);
+		border: 1px solid #aaa;
+		color: #fff;
+		border-radius: 5px;
+	}
+	
+	input[type="search"] {
+		width: 250px;
+	}
+	
+	button {
+		margin: 2px;
+		background: rgba(0, 0, 0, 0.6);
+		border: 1px solid #aaa;
+		color: #fff;
+		border-radius: 4px;
+		font-size: 1em;
+		padding: 3px 6px;
+	}
+	
+	button:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+	
+	#main.table {
+		display: table;
+		width: 100%;
+		height: 100%;
+		table-layout: fixed;
+	}
+	
+	.table-cell {
+		display: table-cell;
+		vertical-align: top;
+	}
+	
+	.sidebar {
+		position: fixed;
+		top: 140px;
+		bottom: 0;
+		left: 0;
+		width: 80px;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.6);
+		padding: 0 5px 5px 5px;
+		box-sizing: border-box;
+		border-right: 2px solid #888;
+		z-index: 3; /* acima do header */
+	}
+	
+	.sidebar-top-border {
+		position: fixed;
+		top: 142px;
+		bottom: 0;
+		left: 5px;
+		width: 80px;
+		height: 2px;
+		background: rgba(0, 8, 30, 1);
+		margin-top: -2px;
+		margin-left: -7px;
+		z-index: 4; /* acima da sidebar */
+	}
+	
+	.sidebar ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.sidebar ul li {
+		margin: 5px 0;
+	}
+	
+	.sidebar ul li a {
+		text-decoration: none;
+		font-size: 1.2em;
+		display: block;
+		color: #ffffff;
+	}
+	
+	.sidebar ul li a:hover {
+		color: #ffff00;
+	}
+	
+	.sidebar ul li a:active {
+		color: #0000ff;
+	}
+	
+	#letters {
+		margin-top: 40px;
+	}
+	
+	#letters a {
+		width: 100%;
+		text-align: center;
+		margin: 2px 0;
+		display: block;
+		color: #ffffff;
+	}
+	
+	#letters a:hover {
+		color: #ffff00 !important;
+	}
+	
+	#letters a:active {
+		color: #0000ff !important;
+	}
+	
+	.content {
+		padding: 10px;
+		text-align: center;
+	}
+	
+	ul#list {
+		position: relative;
+		top: 150px;
+		width: max-content;
+		left: -400px;
+		list-style: none;
+		padding: 10px 20px;
+		margin: 0 auto;
+		display: inline-block;
+		text-align: left;
+		font-size: 1.0em;
+		background: rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
+		white-space: nowrap;
+		min-width: 400px;
+		z-index: 1; /* acima apenas do fundo */
+	}
+	
+	ul#list li {
+		padding: 8px 10px;
+		border-bottom: 1px solid #333;
+	}
+	
+	ul#list li a {
+		text-decoration: none;
+		color: #fff;
+	}
+	
+	ul#list li a:hover {
+		text-decoration: underline;
+		color: #66ccf
+	
 </style>
 
 <body>
