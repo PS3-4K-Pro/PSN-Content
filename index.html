@@ -16,7 +16,6 @@
         color: #fff;
         font-family: Arial, sans-serif;
         text-align: center;
-		z-index: -1;
     }
 
     header {
@@ -171,22 +170,22 @@
     }
 
     ul#list {
-        position: relative;
-        top: 150px;
-        width: max-content;
-        left: -400px;
-        list-style: none;
-        padding: 10px 20px;
-		margin: 0 auto;
-        display: inline-block;
-        text-align: left;
-        font-size: 1.0em;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
-        white-space: nowrap;
-        min-width: 400px;
-		z-index: 0
-    }
+    position: relative; /* Necessário para z-index funcionar */
+    top: 150px;
+    width: max-content;
+    left: -400px;
+    list-style: none;
+    padding: 10px 20px;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: left;
+    font-size: 1.0em;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    white-space: nowrap;
+    min-width: 400px;
+    z-index: 0; /* Ajustável se necessário */
+}
 
     ul#list li {
         padding: 8px 10px;
