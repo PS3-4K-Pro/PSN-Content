@@ -71,10 +71,6 @@
         background: rgba(255, 255, 255, 0.1);
     }
 
-    #letters {
-        margin-top: 10px;
-    }
-
     ul#list {
         list-style: none;
         padding: 10px;
@@ -84,6 +80,7 @@
         text-align: left;
         background: rgba(0, 0, 0, 0.5);
         border-radius: 10px;
+        margin-left: 260px; /* Ajuste para evitar sobreposição com a sidebar */
     }
 
     ul#list li {
@@ -120,82 +117,79 @@
     /* Estilos da Sidebar */
     .sidebar {
         width: 250px;
-        height: 100%;
         background: rgba(0, 0, 0, 0.8);
-        position: fixed;
-        top: 0;
-        left: -250px; /* Escondida por padrão */
-        transition: left 0.3s ease; /* Animação suave */
-        z-index: 1000;
         padding: 20px;
         box-sizing: border-box;
-    }
-
-    .sidebar.open {
-        left: 0; /* Mostra a sidebar */
+        display: block; /* Visível e fixa no layout */
+        float: left; /* Alinha à esquerda, logo após o header */
     }
 
     .sidebar-toggle {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        background: rgba(0, 0, 0, 0.6);
-        border: 1px solid #aaa;
-        color: #fff;
-        padding: 8px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        z-index: 1100;
-    }
-
-    .sidebar-toggle:hover {
-        background: rgba(255, 255, 255, 0.1);
+        display: none; /* Remove o botão de toggle, pois a sidebar será fixa */
     }
 
     .sidebar ul {
         list-style: none;
         padding: 0;
-        margin: 20px 0;
+        margin: 0;
     }
 
     .sidebar ul li {
-        margin: 10px 0;
+        margin: 5px 0;
     }
 
     .sidebar ul li a {
-        color: #fff;
+        color: #fff !important; /* Força texto branco */
         text-decoration: none;
         font-size: 1.2em;
+        display: block; /* Garante que cada item ocupe uma linha */
     }
 
-    .sidebar ul li a:hover {
-        color: #66ccff;
+    .sidebar ul li a:hover,
+    .sidebar ul li a:focus {
+        color: #0000FF !important; /* Força azul no hover ou foco */
+        text-decoration: underline; /* Opcional: sublinha no hover */
     }
+
+    /* Estilo para os links alfabéticos na sidebar */
+    #letters {
+        margin-top: 20px;
+    }
+
+    #letters a {
+        width: 100%; /* Ocupa toda a largura da sidebar */
+        text-align: center;
+        margin: 2px 0; /* Espaçamento vertical */
+        display: block; /* Garante que fiquem um abaixo do outro */
+        color: #fff !important; /* Fallback inline */
+    }
+
+    #letters a:hover,
+    #letters a:focus {
+        color: #0000FF !important; /* Fallback inline para hover */
+    }
+
+    /* Desativa cores padrão de links */
+    a:link { color: #fff !important; }
+    a:visited { color: #fff !important; }
+    a:active { color: #fff !important; }
 </style>
 
 <body>
-    <!-- Botão para abrir/fechar a sidebar -->
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Menu</button>
-
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="#" onclick="location.hash='';render()">Home</a></li>
-            <li><a href="#" onclick="fetchDB()">Reload Database</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#settings">Settings</a></li>
-        </ul>
-    </div>
-
     <header>
         <a href="">PlayStation® Network Database</a>
         <form name="engine" onsubmit="location.hash=query.value;render();return false">
             <input type="search" name="query" size="25" placeholder="Search">
             <input type="submit" name="send" value="Search" disabled>
             <input type="button" name="fetch" value="Reload DB" onclick="fetchDB()">
-            <ul id="letters"><button type="button" onclick="location.hash='^'+this.innerHTML;render()">[0-9]</button></ul>
         </form>
     </header>
+
+    <div class="sidebar" id="sidebar">
+        <ul id="letters">
+            <!-- Links alfabéticos serão inseridos aqui pelo JavaScript -->
+        </ul>
+    </div>
 
     <ul id="list"></ul>
 
@@ -211,11 +205,6 @@
             }
         }
         return lines;
-    }
-
-    function toggleSidebar() {
-        var sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('open');
     }
 
     try {
@@ -261,11 +250,11 @@
             }
             document.getElementById('list').innerHTML = matches.join('');
         }
-        var buttons = '';
+        var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()" style="color: #fff !important;">[0-9]</a>';
         for (var c = 65; c < 91; c++) {
-            buttons += '<button type="button" onclick="location.hash=\'^\'+this.innerHTML;render()">' + String.fromCharCode(c) + '</button>';
+            links += '<a href="#" onclick="location.hash=\'^\'+this.innerHTML;render()" style="color: #fff !important;">' + String.fromCharCode(c) + '</a>';
         }
-        document.getElementById("letters").innerHTML += buttons;
+        document.getElementById("letters").innerHTML = links;
         f.query.value = location.hash.replace(/^#+/, '');
         render();
         if (!DB.length) {
