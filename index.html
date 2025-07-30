@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, user-scalable=no" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
 <title>PlayStation™Network Database</title>
 <script>
-    javascript:window.resizeTo(screen.width, screen.height);
+    javascript:window.resizeTo(screen.width,screen.height)
 </script>
 <style>
-   html,
-    body {
+    html, body {
         margin: 0;
         padding: 0;
         height: 100%;
         background: url("background.png") no-repeat center center fixed;
         background-size: cover;
         color: #fff;
-         font-family: Arial, sans-serif;
+        font-family: Arial, sans-serif;
         text-align: center;
     }
 
@@ -30,28 +29,19 @@
     }
 
     header a {
-        font-size: 3.2em;
+        font-size: 3em;
         color: #ffffff;
         text-decoration: none;
         font-weight: bold;
         display: block;
-        letter-spacing: 0.1em;
     }
 
     header a:hover {
         color: #66ccff;
     }
 
-    #count {
-        margin-top: 6px;
-        font-size: 1.1em;
-        color: #66ccff;
-        text-shadow: 0 0 3px #004488;
-        font-weight: 600;
-    }
-
     form {
-         margin: 10px auto;
+        margin: 10px auto;
     }
 
     input[type="search"],
@@ -102,7 +92,7 @@
         padding: 20px 5px;
         box-sizing: border-box;
 		border-right: 2px solid #888;
-	}
+    }
 
     .sidebar ul {
         list-style: none;
@@ -119,22 +109,21 @@
         font-size: 1.2em;
         display: block;
         color: #ffffff;
-	}
+    }
 
     .sidebar ul li a:hover {
         color: #ffff00;
     }
 
     .sidebar ul li a:active {
-        color: #004488;
-        text-shadow: none;
+        color: #0000ff;
     }
 
     #letters {
         margin-top: 20px;
     }
 
-     #letters a {
+    #letters a {
         width: 100%;
         text-align: center;
         margin: 2px 0;
@@ -143,8 +132,7 @@
     }
 
     #letters a:hover {
-        color: #0091ea !important;
-        text-shadow: 0 0 6px #00aaff !important;
+        color: #ffff00 !important;
     }
 
     #letters a:active {
@@ -165,21 +153,22 @@
 		background: rgba(0, 0, 0, 0.5);
 		border-radius: 10px;
 		white-space: nowrap;
-		min-width: 600px;
+		min-width: 400px;
 	}
 
     ul#list li {
         padding: 8px 10px;
-        border-bottom: 1px solid #003366;
-        font-weight: 600;
-        font-size: 1.1em;
+        border-bottom: 1px solid #333;
     }
 
-    color: #fff;
+    ul#list li a {
+        text-decoration: none;
+        color: #fff;
     }
 
     ul#list li a:hover {
-		color: #66ccff;
+        text-decoration: underline;
+        color: #66ccff;
     }
 
     [download] {
@@ -288,8 +277,8 @@
                 }
                 document.getElementById('list').innerHTML = matches.join('');
 
-                // Atualiza o contador exibido no header
-                document.getElementById('count').textContent = matches.length + " items shown";
+               
+			   document.getElementById('count').textContent = matches.length + " items shown";
             }
 
             var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()">[0-9]</a>';
