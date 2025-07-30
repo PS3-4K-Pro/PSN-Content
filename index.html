@@ -2,20 +2,20 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=no">
-  <title>PlayStation™Network Database</title>
-  <script>
-      javascript:window.resizeTo(screen.width,screen.height)
-   </script>
+<title>PlayStation™Network Database</title>
+<script>
+    javascript:window.resizeTo(screen.width,screen.height)
+</script>
 <style>
-    body {
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
         background: url("background.png") no-repeat center center fixed;
         background-size: cover;
         color: #fff;
         font-family: Arial, sans-serif;
         text-align: center;
-        margin: 0;
-        padding: 0;
-		height: 100%;
     }
 
     header {
@@ -74,16 +74,79 @@
         background: rgba(255, 255, 255, 0.1);
     }
 
+    #main {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .sidebar {
+        width: 80px;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 20px 5px;
+        float: left;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .sidebar-toggle {
+        display: none;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar ul li {
+        margin: 5px 0;
+    }
+
+    .sidebar ul li a {
+        text-decoration: none;
+        font-size: 1.2em;
+        display: block;
+        color: #ffffff;
+    }
+
+    .sidebar ul li a:hover {
+        color: #ffff00;
+    }
+
+    .sidebar ul li a:active {
+        color: #0000ff;
+    }
+
+    #letters {
+        margin-top: 20px;
+    }
+
+    #letters a {
+        width: 100%;
+        text-align: center;
+        margin: 2px 0;
+        display: block;
+        color: #ffffff;
+    }
+
+    #letters a:hover {
+        color: #ffff00 !important;
+    }
+
+    #letters a:active {
+        color: #0000ff !important;
+    }
+
     ul#list {
         list-style: none;
         padding: 10px;
-        margin: 20px auto;
-        width: 92%;
-        max-width: 800px;
+        margin: 20px 0 20px 80px; /* alinha ao lado da sidebar */
+        width: auto;
         text-align: left;
         background: rgba(0, 0, 0, 0.5);
         border-radius: 10px;
-        margin-left: 380px; /* Ajuste para evitar sobreposição com a sidebar */
     }
 
     ul#list li {
@@ -116,78 +179,19 @@
         height: auto;
         margin: 10px auto;
     }
-
-    /* Estilos da Sidebar */
-	.sidebar {
-		width: 80px;
-		background: rgba(0, 0, 0, 0.6);
-		padding: 20px;
-		box-sizing: border-box;
-		height: 100%; /* Estende até o final da página */
-		float: left;
-	}
-
-    .sidebar-toggle {
-        display: none;
-    }
-
-    .sidebar ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .sidebar ul li {
-        margin: 5px 0;
-    }
-
-    .sidebar ul li a {
-        text-decoration: none;
-        font-size: 1.2em;
-        display: block;
-        color: #ffffff; /* Cor padrão: branco */
-    }
-
-    .sidebar ul li a:hover {
-        color: #ffff00; /* Amarelo no hover */
-    }
-
-    .sidebar ul li a:active {
-        color: #0000ff; /* Azul quando clicado */
-    }
-
-    /* Estilo para os links alfabéticos na sidebar */
-    #letters {
-        margin-top: 20px;
-    }
-
-    #letters a {
-        width: 100%;
-        text-align: center;
-        margin: 2px 0;
-        display: block;
-        color: #ffffff; /* Cor padrão: branco */
-    }
-
-    #letters a:hover {
-        color: #ffff00 !important; /* Amarelo no hover */
-    }
-
-    #letters a:active {
-        color: #0000ff !important; /* Azul quando clicado */
-    }
 </style>
 
 <body>
-    <header>
-        <a href="">PlayStation® Network Database 2</a>
-        <form name="engine" onsubmit="location.hash=query.value;render();return false">
-            <input type="search" name="query" size="25" placeholder="Search">
-            <input type="submit" name="send" value="Search" disabled>
-            <input type="button" name="fetch" value="Reload DB" onclick="fetchDB()">
-        </form>
-    </header>
+<header>
+    <a href="">PlayStation® Network Database 2</a>
+    <form name="engine" onsubmit="location.hash=query.value;render();return false">
+        <input type="search" name="query" size="25" placeholder="Search">
+        <input type="submit" name="send" value="Search" disabled>
+        <input type="button" name="fetch" value="Reload DB" onclick="fetchDB()">
+    </form>
+</header>
 
+<div id="main">
     <div class="sidebar" id="sidebar">
         <ul id="letters">
             <!-- Links alfabéticos serão inseridos aqui pelo JavaScript -->
@@ -195,6 +199,7 @@
     </div>
 
     <ul id="list"></ul>
+</div>
 
 <script>
     function sort(lines, algo) {
@@ -213,12 +218,14 @@
     try {
         var f = document.forms.engine;
         var DB = window.localStorage ? JSON.parse(localStorage.DB || '[]') : [];
+
         function makeRap(row) {
             var hex = row[4];
             if (!hex) return "";
             if (hex == 0) return '<span>press Circle in ReactPSN</span>';
             return '<a download="' + row[1] + '-' + row[0] + '_00-' + hex + '.rap" href="' + hex + '.rap">RAP</a>';
         }
+
         function fetchDB() {
             f.fetch.disabled = true;
             var xhr = new XMLHttpRequest();
@@ -234,6 +241,7 @@
             xhr.open('GET', 'db.csv');
             xhr.send();
         }
+
         function render() {
             f.fetch.type = window.localStorage ? 'button' : 'hidden';
             f.send.disabled = DB.length == 0;
@@ -253,7 +261,7 @@
             }
             document.getElementById('list').innerHTML = matches.join('');
         }
-        // Removido o style inline para permitir que o CSS controle as cores
+
         var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()">[0-9]</a>';
         for (var c = 65; c < 91; c++) {
             links += '<a href="#" onclick="location.hash=\'^\'+this.innerHTML;render()">' + String.fromCharCode(c) + '</a>';
@@ -264,7 +272,9 @@
         if (!DB.length) {
             fetchDB();
         }
-    } catch (a) { alert(a); }
+    } catch (a) {
+        alert(a);
+    }
 </script>
 </body>
 </html>
