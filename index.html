@@ -1,133 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>PSNDL XMB Style</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('background.png') no-repeat center center fixed;
-      background-size: cover;
-      font-family: sans-serif;
-      color: #fff;
-      overflow-x: hidden;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<title>PSNDL</title>
+<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+<style>
+	body {
+		background: url("background.png") no-repeat center center fixed;
+		background-size: cover;
+		color: #fff;
+		font-family: Arial, sans-serif;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
 
-    header {
+	header {
       padding: 10px 15px;
       background: rgba(0, 0, 0, 0.6);
       text-align: center;
-      font-size: 20px;
+      font-size: 12px;
       font-weight: bold;
       border-bottom: 2px solid #888;
     }
 
-    .search-bar {
-      margin: 20px auto;
-      text-align: center;
-    }
+	header a {
+		font-size: 3em;
+		color: #40a0ff;
+		text-decoration: none;
+		font-weight: bold;
+		display: block;
+	}
 
-    .search-bar input {
-      width: 60%;
-      padding: 10px;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-    }
+	header a:hover {
+		color: #66ccff;
+	}
 
-    .search-bar button {
-      padding: 10px 15px;
-      font-size: 16px;
-      margin-left: 5px;
-      background: #0072ce;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+	form {
+		margin: 10px auto;
+	}
 
-    .search-bar button:hover {
-      background: #005bb5;
-    }
+	input[type="search"],
+	input[type="submit"],
+	input[type="button"] {
+		font-size: 1.2em;
+		padding: 6px 10px;
+		margin: 5px;
+		background: rgba(0, 0, 0, 0.6);
+		border: 1px solid #aaa;
+		color: #fff;
+		border-radius: 5px;
+	}
 
-    .result {
-      margin: 10px auto;
-      width: 90%;
-      max-width: 800px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 15px;
-      border-radius: 10px;
-    }
+	input[type="search"] {
+		width: 250px;
+	}
 
-    .result h3 {
-      margin: 0;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-    }
+	button {
+		margin: 2px;
+		background: rgba(0, 0, 0, 0.6);
+		border: 1px solid #aaa;
+		color: #fff;
+		border-radius: 4px;
+		font-size: 1em;
+		padding: 3px 6px;
+	}
 
-    .result svg {
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      fill: white;
-    }
+	button:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
 
-    audio {
-      display: none;
-    }
-  </style>
-</head>
+	#letters {
+		margin-top: 10px;
+	}
+
+	ul#list {
+		list-style: none;
+		padding: 10px;
+		margin: 20px auto;
+		width: 92%;
+		max-width: 800px;
+		text-align: left;
+		background: rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
+	}
+
+	ul#list li {
+		padding: 8px 10px;
+		border-bottom: 1px solid #333;
+	}
+
+	ul#list li a {
+		color: #66b2ff;
+		text-decoration: none;
+	}
+
+	ul#list li a:hover {
+		text-decoration: underline;
+	}
+
+	[download] {
+		background: #fff;
+		color: #000 !important;
+		padding: 2px 6px;
+		margin-left: 10px;
+		text-decoration: none;
+		border-radius: 3px;
+		font-size: 0.9em;
+	}
+
+	#icon {
+		width: 64px;
+		height: auto;
+		margin: 10px auto;
+	}
+</style>
+
 <body>
+	<header>
+		<a href="">PlayStation® Network Download List</a>
+		<form name="engine" onsubmit="location.hash=query.value;render();return false">
+			<input type="search" name="query" size="25" placeholder="Search">
+			<input type="submit" name="send" value="Search" disabled>
+			<input type="button" name="fetch" value="Reload DB" onclick="fetchDB()">
+			<ul id="letters"><button type="button" onclick="location.hash='^'+this.innerHTML;render()">[0-9]</button></ul>
+		</form>
+	</header>
 
-<header>PlayStation® Network Download List</header>
+	<ul id="list"></ul>
 
-<div class="search-bar">
-  <input id="searchBox" type="text" placeholder="Search TitleID, Name, or Category">
-  <button onclick="reload()">Reload</button>
-  <button onclick="search()">Search</button>
-</div>
+	<audio autoplay loop id="bgm" style="display:none">
+		<source src="bgm.mp3" type="audio/mpeg">
+	</audio>
 
-<div id="results"></div>
+	<script>
+		function sort(lines, algo) {
+			for (var i = 0; i < lines.length; i++) {
+				for (var j = 0; j < lines.length - i - 1; j++) {
+					if (algo(lines[j], lines[j + 1])) {
+						var temp = lines[j];
+						lines[j] = lines[j + 1];
+						lines[j + 1] = temp;
+					}
+				}
+			}
+			return lines;
+		}
+		try {
+			var f = document.forms.engine;
+			var DB = window.localStorage ? JSON.parse(localStorage.DB || '[]') : [];
 
-<audio id="bgm" autoplay loop>
-  <source src="bgm.mp3" type="audio/mpeg">
-</audio>
+			function makeRap(row) {
+				var hex = row[4];
+				if (!hex) return "";
+				if (hex == 0) return '<span>press Circle in ReactPSN</span>';
+				return '<a download="' + row[1] + '-' + row[0] + '_00-' + hex + '.rap" href="' + hex + '.rap">RAP</a>';
+			}
 
-<script>
-  const results = document.getElementById('results');
+			function fetchDB() {
+				f.fetch.disabled = true;
+				var xhr = new XMLHttpRequest();
+				xhr.onabort = xhr.ontimeout = xhr.onerror = alert;
+				xhr.onload = function () {
+					if (xhr.status != 200) return alert(xhr.status);
+					DB = xhr.responseText.split("\n");
+					for (var i = 0; i < DB.length; i++) DB[i] = DB[i].split(",");
+					if (window.localStorage) { localStorage.DB = JSON.stringify(DB); }
+					f.fetch.disabled = false;
+					render();
+				};
+				xhr.open('GET', 'db.csv');
+				xhr.send();
+			}
 
-  function addResult(title) {
-    const div = document.createElement('div');
-    div.className = 'result';
-    div.innerHTML = `
-      <h3>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 4v16h14V4H5zm12 14H7V6h10v12z"/></svg>
-        ${title}
-      </h3>`;
-    results.appendChild(div);
-  }
+			function render() {
+				f.fetch.type = window.localStorage ? 'button' : 'hidden';
+				f.send.disabled = DB.length == 0;
+				f.query.placeholder = DB.length + " URL loaded";
+				var query = decodeURIComponent(location.hash.replace(/^#+/, ''));
+				var startsWith = query.length && query[0] == '^';
+				var rule = new RegExp(query, 'i');
+				var matches = [];
+				for (var i = 0; i < DB.length && matches.length < (startsWith ? 999 : 99); i++) {
+					if (DB[i][5].match(rule) || (DB[i][0] == query))
+						matches.push(DB[i]);
+				}
+				sort(matches, function (a, b) { return a[5] > b[5]; });
+				for (var i = 0; i < matches.length; i++) {
+					var a = matches[i];
+					matches[i] = '<li><a href="http://zeus.dl.playstation.net/cdn/' + a[1] + '/' + a[0] + '_00/' + a[2] + '.pkg">' + a[5] + ' ' + (a[3]) + ' [' + a[0] + "]</a> " + makeRap(a) + "</li>";
+				}
+				document.getElementById('list').innerHTML = matches.join('');
+			};
 
-  function reload() {
-    results.innerHTML = '';
-    addResult("Reloaded list (example item 1)");
-    addResult("Reloaded list (example item 2)");
-  }
-
-  function search() {
-    const query = document.getElementById('searchBox').value.trim().toLowerCase();
-    results.innerHTML = '';
-    if (!query) {
-      addResult("Please enter a search term.");
-      return;
-    }
-    // Dummy results for demo
-    addResult(`Result for "${query}"`);
-  }
-</script>
-
+			var buttons = '';
+			for (var c = 65; c < 91; c++) {
+				buttons += '<button type="button" onclick="location.hash=\'^\'+this.innerHTML;render()">' + String.fromCharCode(c) + '</button>';
+			}
+			document.getElementById("letters").innerHTML += buttons;
+			f.query.value = location.hash.replace(/^#+/, '');
+			render();
+			if (!DB.length) {
+				fetchDB()
+			}
+		} catch (a) { alert(a) }
+	</script>
 </body>
 </html>
