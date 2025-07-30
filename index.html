@@ -11,7 +11,7 @@
         margin: 0;
         padding: 0;
         height: 100%;
-        background: url("background.png") no-repeat center center fixed;
+        background: url("./resources/media/background.png") no-repeat center center fixed;
         background-size: cover;
         color: #fff;
         font-family: Arial, sans-serif;
@@ -264,7 +264,7 @@
                     f.fetch.disabled = false;
                     render();
                 };
-                xhr.open('GET', 'db.csv');
+                xhr.open('GET', './resources/database/db.csv');
                 xhr.send();
             }
 
