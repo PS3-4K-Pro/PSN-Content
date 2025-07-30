@@ -1,8 +1,8 @@
 <!-- Coded for PS3™ 4K Pro by Luan Teles -->
 <html>
-	<head>
-		<title>PlayStation™Network Database</title>
-	</head>
+<head>
+    <title>PlayStation™Network Database</title>
+</head>
 <script>
     javascript:window.resizeTo(screen.width,screen.height)
 </script>
@@ -26,8 +26,8 @@
         font-weight: bold;
         border-bottom: 2px solid #888;
         display: block;
-		position: relative;
-		z-index: 1;
+        position: relative;
+        z-index: 1;
     }
 
     header a {
@@ -89,25 +89,25 @@
     }
 
     .sidebar {
-		width: 80px;
-		background: rgba(0, 0, 0, 0.6);
-		padding: 20px 5px;
-		box-sizing: border-box;
-		border-right: 2px solid #888;
-		position: relative;
-		z-index: 2;
-	}
+        position: relative; /* para a barra superior posicionar corretamente */
+        width: 80px;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 20px 5px;
+        box-sizing: border-box;
+        border-right: 2px solid #888;
+        z-index: 2;
+    }
 
-	.sidebar::before {
-		content: "";
-		position: absolute;
-		top: -2px;
-		left: 0;
-		width: 100%;
-		height: 2px;
-		background: rgba(8, 12, 36, 1);
-		z-index: 3;
-	}
+    /* Substitui o ::before por um elemento real */
+    .sidebar-top-border {
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: rgba(8, 12, 36, 1);
+        z-index: 3;
+    }
 
     .sidebar ul {
         list-style: none;
@@ -154,23 +154,23 @@
         color: #0000ff !important;
     }
 
-   .content {
-		padding: 10px;
-		text-align: center;
-	}
+    .content {
+        padding: 10px;
+        text-align: center;
+    }
 
-	ul#list {
-		list-style: none;
-		padding: 10px 20px;
-		margin: 0 auto;
-		display: inline-block;
-		text-align: left;
-		font-size: 1.0em;
-		background: rgba(0, 0, 0, 0.5);
-		border-radius: 10px;
-		white-space: nowrap;
-		min-width: 400px;
-	}
+    ul#list {
+        list-style: none;
+        padding: 10px 20px;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: left;
+        font-size: 1.0em;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        white-space: nowrap;
+        min-width: 400px;
+    }
 
     ul#list li {
         padding: 8px 10px;
@@ -217,6 +217,7 @@
 
     <div id="main" class="table">
         <div class="sidebar table-cell" id="sidebar">
+            <div class="sidebar-top-border"></div> <!-- barra superior visível no PS3 -->
             <ul id="letters"></ul>
         </div>
         <div class="content table-cell">
@@ -292,7 +293,7 @@
                     matches[i] = '<li><a href="http://zeus.dl.playstation.net/cdn/' + a[1] + '/' + a[0] + '_00/' + a[2] + '.pkg">' + a[5] + ' ' + (a[3]) + ' [' + a[0] + "]</a> " + makeRap(a) + "</li>";
                 }
                 document.getElementById('list').innerHTML = matches.join('');
-				document.getElementById('count').textContent = "Displaying " + matches.length + " items";
+                document.getElementById('count').textContent = "Displaying " + matches.length + " items";
             }
 
             var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()">[0-9]</a>';
