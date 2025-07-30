@@ -8,90 +8,88 @@
 	body {
 		background: url("background.png") no-repeat center center fixed;
 		background-size: cover;
-		color: #fff;
-		font-family: Arial, sans-serif;
-		text-align: center;
 		margin: 0;
 		padding: 0;
+		font-family: Arial, sans-serif;
+		color: #fff;
+		text-align: center;
 	}
 
 	header {
-      padding: 10px 15px;
-      background: rgba(0, 0, 0, 0.6);
-      text-align: center;
-      font-size: 12px;
-      font-weight: bold;
-      border-bottom: 2px solid #888;
-    }
+		background: linear-gradient(to bottom, #101010 0%, #1a1a1a 100%);
+		padding: 12px 10px;
+		border-bottom: 1px solid #444;
+		font-size: 13px;
+	}
 
 	header a {
-		font-size: 3em;
-		color: #40a0ff;
+		font-size: 2.2em;
+		color: #4aaaff;
 		text-decoration: none;
 		font-weight: bold;
-		display: block;
 	}
 
 	header a:hover {
-		color: #66ccff;
+		color: #77cfff;
 	}
 
 	form {
-		margin: 10px auto;
+		margin-top: 10px;
 	}
 
 	input[type="search"],
 	input[type="submit"],
 	input[type="button"] {
-		font-size: 1.2em;
+		font-size: 1em;
 		padding: 6px 10px;
-		margin: 5px;
-		background: rgba(0, 0, 0, 0.6);
-		border: 1px solid #aaa;
+		margin: 4px 3px;
+		background: #111;
+		border: 1px solid #666;
 		color: #fff;
-		border-radius: 5px;
+		border-radius: 6px;
 	}
 
 	input[type="search"] {
-		width: 250px;
+		width: 220px;
 	}
 
 	button {
-		margin: 2px;
-		background: rgba(0, 0, 0, 0.6);
-		border: 1px solid #aaa;
+		background: #222;
+		border: 1px solid #555;
 		color: #fff;
-		border-radius: 4px;
-		font-size: 1em;
-		padding: 3px 6px;
+		font-size: 0.9em;
+		padding: 4px 6px;
+		margin: 2px 1px;
+		border-radius: 5px;
 	}
 
 	button:hover {
-		background: rgba(255, 255, 255, 0.1);
+		background: #333;
 	}
 
 	#letters {
-		margin-top: 10px;
+		margin: 12px 0;
 	}
 
 	ul#list {
 		list-style: none;
 		padding: 10px;
-		margin: 20px auto;
-		width: 92%;
-		max-width: 800px;
+		margin: 18px auto;
+		width: 90%;
+		max-width: 820px;
+		background: rgba(0, 0, 0, 0.65);
+		border-radius: 8px;
 		text-align: left;
-		background: rgba(0, 0, 0, 0.5);
-		border-radius: 10px;
 	}
 
 	ul#list li {
 		padding: 8px 10px;
 		border-bottom: 1px solid #333;
+		font-size: 14px;
 	}
 
 	ul#list li a {
-		color: #66b2ff;
+		color: #4aaaff;
 		text-decoration: none;
 	}
 
@@ -104,15 +102,9 @@
 		color: #000 !important;
 		padding: 2px 6px;
 		margin-left: 10px;
-		text-decoration: none;
 		border-radius: 3px;
-		font-size: 0.9em;
-	}
-
-	#icon {
-		width: 64px;
-		height: auto;
-		margin: 10px auto;
+		font-size: 0.85em;
+		text-decoration: none;
 	}
 </style>
 
@@ -128,10 +120,6 @@
 	</header>
 
 	<ul id="list"></ul>
-
-	<audio autoplay loop id="bgm" style="display:none">
-		<source src="bgm.mp3" type="audio/mpeg">
-	</audio>
 
 	<script>
 		function sort(lines, algo) {
@@ -165,7 +153,7 @@
 					if (xhr.status != 200) return alert(xhr.status);
 					DB = xhr.responseText.split("\n");
 					for (var i = 0; i < DB.length; i++) DB[i] = DB[i].split(",");
-					if (window.localStorage) { localStorage.DB = JSON.stringify(DB); }
+					if (window.localStorage) localStorage.DB = JSON.stringify(DB);
 					f.fetch.disabled = false;
 					render();
 				};
@@ -200,10 +188,8 @@
 			document.getElementById("letters").innerHTML += buttons;
 			f.query.value = location.hash.replace(/^#+/, '');
 			render();
-			if (!DB.length) {
-				fetchDB()
-			}
-		} catch (a) { alert(a) }
+			if (!DB.length) fetchDB();
+		} catch (e) { alert(e); }
 	</script>
 </body>
 </html>
