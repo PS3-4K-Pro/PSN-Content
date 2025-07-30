@@ -19,8 +19,8 @@
     }
 
     header {
-        position: fixed;
-        top: 0;
+		position: fixed;
+		top: 0;
         left: 0;
         right: 0;
         height: 120px;
@@ -31,7 +31,6 @@
         font-weight: bold;
         border-bottom: 2px solid #888;
         display: block;
-        z-index: 10;
     }
 
     header a {
@@ -93,12 +92,12 @@
     }
 
     .sidebar {
-        position: fixed;
+		position: fixed;
         top: 142px;
         bottom: 0;
         left: 0;
         width: 80px;
-        height: 100vh;
+		height: 100%vh;
         background: rgba(0, 0, 0, 0.6);
         padding: 0 5px 5px 5px;
         box-sizing: border-box;
@@ -106,11 +105,11 @@
     }
 
     .sidebar-top-border {
-        width: 80px;
+		width: 80px;
         height: 2px;
         background: rgba(0, 8, 30, 1);
-        margin-top: -2px;
-        margin-left: -7px;
+		margin-top: -2px;
+		margin-left: -7px;
     }
 
     .sidebar ul {
@@ -161,23 +160,13 @@
     .content {
         padding: 10px;
         text-align: center;
-        position: relative;
-        z-index: 1;
-    }
-
-    /* ENVOLTORIO PARA EFEITO DE DESVANECIMENTO */
-    .fade-wrapper {
-        position: relative;
-        overflow-y: auto;
-        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
-        mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);
     }
 
     ul#list {
-        position: relative;
+		position: relative;
         top: 150px;
-        width: 80px;
-        left: -400px;
+		width: max-content;
+		left: -400px;
         list-style: none;
         padding: 10px 20px;
         margin: 0 auto;
@@ -189,6 +178,7 @@
         white-space: nowrap;
         min-width: 400px;
     }
+
 
     ul#list li {
         padding: 8px 10px;
@@ -220,36 +210,36 @@
         height: auto;
         margin: 10px auto;
     }
+	
+	::-webkit-scrollbar {
+            width: 8px;
+        }
 
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
 
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
+        ::-webkit-scrollbar-thumb {
+            background: #aaa;
+        }
 
-    ::-webkit-scrollbar-thumb {
-        background: #aaa;
-    }
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-weight: bold;
+            border: 2px solid #888;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 15;
+        }
 
-    #backToTop {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 10px 16px;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        font-weight: bold;
-        border: 2px solid #888;
-        border-radius: 8px;
-        cursor: pointer;
-        z-index: 15;
-    }
-
-    #backToTop:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
+        #backToTop:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
 </style>
 
 <body>
@@ -262,16 +252,14 @@
             <input type="button" name="fetch" value="Reload DB" onclick="fetchDB()">
         </form>
     </header>
-
-    <div id="main" class="table">
+	
+	 <div id="main" class="table">
         <div class="sidebar table-cell" id="sidebar">
             <div class="sidebar-top-border"></div>
             <ul id="letters"></ul>
         </div>
         <div class="content table-cell">
-            <div class="fade-wrapper">
-                <ul id="list"></ul>
-            </div>
+            <ul id="list"></ul>
         </div>
     </div>
 
@@ -279,7 +267,7 @@
 
     <script>
         function scrollToTop() {
-            const content = document.querySelector(".fade-wrapper");
+            const content = document.getElementById("content");
             content.scrollTo({ top: 0, behavior: "smooth" });
         }
 
