@@ -15,6 +15,7 @@
         text-align: center;
         margin: 0;
         padding: 0;
+		height: 100%;
     }
 
     header {
@@ -82,7 +83,7 @@
         text-align: left;
         background: rgba(0, 0, 0, 0.5);
         border-radius: 10px;
-        margin-left: 180px; /* Ajuste para evitar sobreposição com a sidebar */
+        margin-left: 280px; /* Ajuste para evitar sobreposição com a sidebar */
     }
 
     ul#list li {
@@ -117,15 +118,13 @@
     }
 
     /* Estilos da Sidebar */
-    .sidebar {
+	.sidebar {
 		width: 80px;
 		background: rgba(0, 0, 0, 0.5);
 		padding: 20px;
 		box-sizing: border-box;
-		display: block;
+		height: 100%; /* Estende até o final da página */
 		float: left;
-		height: 100vh; /* Altura igual à altura da janela */
-		position: fixed; /* Fixa a sidebar na tela */
 	}
 
     .sidebar-toggle {
