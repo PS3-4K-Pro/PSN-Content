@@ -192,7 +192,7 @@
 <body>
     <header>
         <a href="">PlayStation® Network Database</a>
-        <div id="count" aria-live="polite" role="status">0 Items</div>
+        <div id="count" aria-live="polite" role="status">Loading</div>
         <form name="engine" onsubmit="location.hash=query.value;render();return false">
             <input type="search" name="query" size="25" placeholder="Search">
             <input type="submit" name="send" value="Search" disabled>
@@ -277,9 +277,7 @@
                     matches[i] = '<li><a href="http://zeus.dl.playstation.net/cdn/' + a[1] + '/' + a[0] + '_00/' + a[2] + '.pkg">' + a[5] + ' ' + (a[3]) + ' [' + a[0] + "]</a> " + makeRap(a) + "</li>";
                 }
                 document.getElementById('list').innerHTML = matches.join('');
-
-               
-			   document.getElementById('count').textContent = matches.length + " Displaying items";
+				document.getElementById('count').textContent = "Displaying " + matches.length + " items";
             }
 
             var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()">[0-9]</a>';
