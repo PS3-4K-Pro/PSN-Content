@@ -2,8 +2,10 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=no">
-<title>PlayStation®Network Downloader for PS3 4K Pro</title>
-<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <title>PlayStation™Network Datavbase</title>
+  <script>
+      javascript:window.resizeTo(screen.width,screen.height)
+   </script>
 <style>
     body {
         background: url("background.png") no-repeat center center fixed;
@@ -80,7 +82,7 @@
         text-align: left;
         background: rgba(0, 0, 0, 0.5);
         border-radius: 10px;
-        margin-left: 160px; /* Ajuste para evitar sobreposição com a sidebar */
+        margin-left: 180px; /* Ajuste para evitar sobreposição com a sidebar */
     }
 
     ul#list li {
@@ -116,16 +118,18 @@
 
     /* Estilos da Sidebar */
     .sidebar {
-        width: 80px;
-        background: rgba(0, 0, 0, 0.8);
-        padding: 20px;
-        box-sizing: border-box;
-        display: block; /* Visível e fixa no layout */
-        float: left; /* Alinha à esquerda, logo após o header */
-    }
+		width: 80px;
+		background: rgba(0, 0, 0, 0.5);
+		padding: 20px;
+		box-sizing: border-box;
+		display: block;
+		float: left;
+		height: 100vh; /* Altura igual à altura da janela */
+		position: fixed; /* Fixa a sidebar na tela */
+	}
 
     .sidebar-toggle {
-        display: none; /* Remove o botão de toggle, pois a sidebar será fixa */
+        display: none;
     }
 
     .sidebar ul {
@@ -139,16 +143,18 @@
     }
 
     .sidebar ul li a {
-        color: #fff !important; /* Força texto branco */
         text-decoration: none;
         font-size: 1.2em;
-        display: block; /* Garante que cada item ocupe uma linha */
+        display: block;
+        color: #ffffff; /* Cor padrão: branco */
     }
 
-    .sidebar ul li a:hover,
-    .sidebar ul li a:focus {
-        color: #0000FF !important; /* Força azul no hover ou foco */
-        text-decoration: underline; /* Opcional: sublinha no hover */
+    .sidebar ul li a:hover {
+        color: #ffff00; /* Amarelo no hover */
+    }
+
+    .sidebar ul li a:active {
+        color: #0000ff; /* Azul quando clicado */
     }
 
     /* Estilo para os links alfabéticos na sidebar */
@@ -157,22 +163,20 @@
     }
 
     #letters a {
-        width: 100%; /* Ocupa toda a largura da sidebar */
+        width: 100%;
         text-align: center;
-        margin: 2px 0; /* Espaçamento vertical */
-        display: block; /* Garante que fiquem um abaixo do outro */
-        color: #fff !important; /* Fallback inline */
+        margin: 2px 0;
+        display: block;
+        color: #ffffff; /* Cor padrão: branco */
     }
 
-    #letters a:hover,
-    #letters a:focus {
-        color: #0000FF !important; /* Fallback inline para hover */
+    #letters a:hover {
+        color: #ffff00 !important; /* Amarelo no hover */
     }
 
-    /* Desativa cores padrão de links */
-    a:link { color: #fff !important; }
-    a:visited { color: #fff !important; }
-    a:active { color: #fff !important; }
+    #letters a:active {
+        color: #0000ff !important; /* Azul quando clicado */
+    }
 </style>
 
 <body>
@@ -250,9 +254,10 @@
             }
             document.getElementById('list').innerHTML = matches.join('');
         }
-        var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()" style="color: #fff !important;">[0-9]</a>';
+        // Removido o style inline para permitir que o CSS controle as cores
+        var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()">[0-9]</a>';
         for (var c = 65; c < 91; c++) {
-            links += '<a href="#" onclick="location.hash=\'^\'+this.innerHTML;render()" style="color: #fff !important;">' + String.fromCharCode(c) + '</a>';
+            links += '<a href="#" onclick="location.hash=\'^\'+this.innerHTML;render()">' + String.fromCharCode(c) + '</a>';
         }
         document.getElementById("letters").innerHTML = links;
         f.query.value = location.hash.replace(/^#+/, '');
