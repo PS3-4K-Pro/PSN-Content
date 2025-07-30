@@ -261,7 +261,7 @@
             function render() {
                 f.fetch.type = window.localStorage ? 'button' : 'hidden';
                 f.send.disabled = DB.length == 0;
-                f.query.placeholder = DB.length + " Games found";
+                f.query.placeholder = DB.length + " items found";
                 var query = decodeURIComponent(location.hash.replace(/^#+/, ''));
                 var startsWith = query.length && query[0] == '^';
                 var rule = new RegExp(query, 'i');
