@@ -89,24 +89,22 @@
     }
 
     .sidebar {
-        position: relative; /* para a barra superior posicionar corretamente */
+		position: relative;
         width: 80px;
         background: rgba(0, 0, 0, 0.6);
         padding: 20px 5px;
         box-sizing: border-box;
         border-right: 2px solid #888;
         z-index: 2;
+        /* position removed */
     }
 
-    /* Substitui o ::before por um elemento real */
     .sidebar-top-border {
-        position: absolute;
-        top: -2px;
-        left: 0;
-        width: 100%;
+        width: 80px;
         height: 2px;
         background: rgba(8, 12, 36, 1);
-        z-index: 3;
+		margin-top: -22px;
+		margin-left: -7px;
     }
 
     .sidebar ul {
@@ -135,7 +133,7 @@
     }
 
     #letters {
-        margin-top: 20px;
+        margin-top: 40px;
     }
 
     #letters a {
@@ -217,7 +215,7 @@
 
     <div id="main" class="table">
         <div class="sidebar table-cell" id="sidebar">
-            <div class="sidebar-top-border"></div> <!-- barra superior visível no PS3 -->
+            <div class="sidebar-top-border"></div>
             <ul id="letters"></ul>
         </div>
         <div class="content table-cell">
