@@ -74,24 +74,24 @@
         background: rgba(255, 255, 255, 0.1);
     }
 
-    #main {
-        min-height: 100%;
-        height: auto !important;
+    /* Layout em tabela para compatibilidade com PS3 */
+    #main.table {
+        display: table;
+        width: 100%;
         height: 100%;
-        overflow: hidden;
+        table-layout: fixed;
+    }
+
+    .table-cell {
+        display: table-cell;
+        vertical-align: top;
     }
 
     .sidebar {
         width: 80px;
         background: rgba(0, 0, 0, 0.6);
         padding: 20px 5px;
-        float: left;
-        height: 100%;
         box-sizing: border-box;
-    }
-
-    .sidebar-toggle {
-        display: none;
     }
 
     .sidebar ul {
@@ -139,10 +139,14 @@
         color: #0000ff !important;
     }
 
+    .content {
+        padding: 10px;
+    }
+
     ul#list {
         list-style: none;
         padding: 10px;
-        margin: 20px 0 20px 80px; /* alinha ao lado da sidebar */
+        margin: 0;
         width: auto;
         text-align: left;
         background: rgba(0, 0, 0, 0.5);
@@ -183,7 +187,7 @@
 
 <body>
 <header>
-    <a href="">PlayStation® Network Database 3</a>
+    <a href="">PlayStation® Network Database 4</a>
     <form name="engine" onsubmit="location.hash=query.value;render();return false">
         <input type="search" name="query" size="25" placeholder="Search">
         <input type="submit" name="send" value="Search" disabled>
@@ -191,14 +195,15 @@
     </form>
 </header>
 
-<div id="main">
-    <div class="sidebar" id="sidebar">
+<div id="main" class="table">
+    <div class="sidebar table-cell" id="sidebar">
         <ul id="letters">
-            <!-- Links alfabéticos serão inseridos aqui pelo JavaScript -->
+            <!-- Links alfabéticos serão inseridos aqui -->
         </ul>
     </div>
-
-    <ul id="list"></ul>
+    <div class="content table-cell">
+        <ul id="list"></ul>
+    </div>
 </div>
 
 <script>
