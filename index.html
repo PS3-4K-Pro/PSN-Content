@@ -1,77 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no" />
 <title>PlayStation™Network Database</title>
 <script>
-    javascript:window.resizeTo(screen.width,screen.height)
+    javascript:window.resizeTo(screen.width, screen.height);
 </script>
 <style>
-    html, body {
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+    html,
+    body {
         margin: 0;
         padding: 0;
         height: 100%;
         background: url("background.png") no-repeat center center fixed;
         background-size: cover;
         color: #fff;
-        font-family: Arial, sans-serif;
+        font-family: 'Roboto Condensed', Arial, sans-serif;
         text-align: center;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     header {
-        padding: 10px 15px;
-        background: rgba(0, 0, 0, 0.6);
+        padding: 12px 20px 8px 20px;
+        background: rgba(0, 0, 0, 0.75);
         text-align: center;
-        font-size: 12px;
-        font-weight: bold;
-        border-bottom: 2px solid #888;
-        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        border-bottom: 2px solid #0091ea;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        user-select: none;
+        position: relative;
     }
 
     header a {
-        font-size: 3em;
-        color: #ffffff;
+        font-size: 3.2em;
+        color: #0091ea;
         text-decoration: none;
-        font-weight: bold;
+        font-weight: 700;
         display: block;
+        letter-spacing: 0.1em;
+        text-shadow: 0 0 6px #00aaff, 0 0 10px #004488;
+        transition: color 0.3s ease;
     }
 
     header a:hover {
         color: #66ccff;
+        text-shadow: 0 0 10px #66ccff, 0 0 15px #3388cc;
+    }
+
+    #count {
+        margin-top: 6px;
+        font-size: 1.1em;
+        color: #66ccff;
+        text-shadow: 0 0 3px #004488;
+        font-weight: 600;
     }
 
     form {
-        margin: 10px auto;
+        margin: 12px auto 0 auto;
     }
 
     input[type="search"],
     input[type="submit"],
     input[type="button"] {
         font-size: 1.2em;
-        padding: 6px 10px;
-        margin: 5px;
+        padding: 8px 14px;
+        margin: 6px 8px 6px 0;
         background: rgba(0, 0, 0, 0.6);
-        border: 1px solid #aaa;
-        color: #fff;
+        border: 1px solid #0091ea;
+        color: #66ccff;
         border-radius: 5px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
     }
 
     input[type="search"] {
-        width: 250px;
+        width: 280px;
+        color: #66ccff;
+    }
+
+    input[type="search"]::placeholder {
+        color: #335577;
+        font-weight: 400;
+    }
+
+    input[type="submit"]:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    input[type="submit"]:not(:disabled):hover,
+    input[type="button"]:hover {
+        background: rgba(0, 145, 234, 0.9);
+        border-color: #66ccff;
+        color: #ffffff;
+        cursor: pointer;
     }
 
     button {
         margin: 2px;
         background: rgba(0, 0, 0, 0.6);
-        border: 1px solid #aaa;
-        color: #fff;
+        border: 1px solid #0091ea;
+        color: #66ccff;
         border-radius: 4px;
         font-size: 1em;
-        padding: 3px 6px;
+        padding: 4px 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
     }
 
     button:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(0, 145, 234, 0.9);
+        cursor: pointer;
     }
 
     #main.table {
@@ -88,10 +131,11 @@
 
     .sidebar {
         width: 80px;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.75);
         padding: 20px 5px;
         box-sizing: border-box;
-		border-right: 2px solid #888;
+        border-right: 2px solid #0091ea;
+        user-select: none;
     }
 
     .sidebar ul {
@@ -101,22 +145,27 @@
     }
 
     .sidebar ul li {
-        margin: 5px 0;
+        margin: 8px 0;
     }
 
     .sidebar ul li a {
         text-decoration: none;
-        font-size: 1.2em;
+        font-size: 1.3em;
         display: block;
-        color: #ffffff;
+        color: #66ccff;
+        text-shadow: 0 0 3px #003366;
+        font-weight: 700;
+        transition: color 0.25s ease;
     }
 
     .sidebar ul li a:hover {
-        color: #ffff00;
+        color: #0091ea;
+        text-shadow: 0 0 5px #00aaff;
     }
 
     .sidebar ul li a:active {
-        color: #0000ff;
+        color: #004488;
+        text-shadow: none;
     }
 
     #letters {
@@ -126,59 +175,73 @@
     #letters a {
         width: 100%;
         text-align: center;
-        margin: 2px 0;
+        margin: 4px 0;
         display: block;
-        color: #ffffff;
+        color: #66ccff;
+        font-weight: 700;
+        user-select: none;
     }
 
     #letters a:hover {
-        color: #ffff00 !important;
+        color: #0091ea !important;
+        text-shadow: 0 0 6px #00aaff !important;
     }
 
     #letters a:active {
-        color: #0000ff !important;
+        color: #004488 !important;
+        text-shadow: none !important;
     }
 
-   .content {
-		padding: 10px;
-		text-align: center;
-	}
+    .content {
+        padding: 10px;
+        text-align: center;
+        overflow-y: auto;
+        max-height: calc(100vh - 120px);
+    }
 
-	ul#list {
-		list-style: none;
-		padding: 10px 20px;
-		margin: 0 auto;
-		display: inline-block;
-		text-align: left;
-		background: rgba(0, 0, 0, 0.5);
-		border-radius: 10px;
-		white-space: nowrap;
-		min-width: 600px;
-	}
+    ul#list {
+        list-style: none;
+        padding: 10px 20px;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: left;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        white-space: nowrap;
+        min-width: 600px;
+        max-width: 95vw;
+        max-height: 100%;
+        overflow-y: auto;
+    }
 
     ul#list li {
         padding: 8px 10px;
-        border-bottom: 1px solid #333;
+        border-bottom: 1px solid #003366;
+        font-weight: 600;
+        font-size: 1.1em;
     }
 
     ul#list li a {
         text-decoration: none;
-        color: #fff;
+        color: #66ccff;
+        transition: color 0.3s ease;
     }
 
     ul#list li a:hover {
         text-decoration: underline;
-        color: #66ccff;
+        color: #0091ea;
     }
 
     [download] {
-        background: #fff;
+        background: #66ccff;
         color: #000 !important;
         padding: 2px 6px;
         margin-left: 10px;
         text-decoration: none;
         border-radius: 3px;
         font-size: 0.9em;
+        font-weight: 700;
+        box-shadow: 0 0 5px #3399ffaa;
     }
 
     #icon {
@@ -189,99 +252,112 @@
 </style>
 
 <body>
-<header>
-    <a href="">PlayStation® Network Database</a>
-    <form name="engine" onsubmit="location.hash=query.value;render();return false">
-        <input type="search" name="query" size="25" placeholder="Search">
-        <input type="submit" name="send" value="Search" disabled>
-        <input type="button" name="fetch" value="Reload DB" onclick="fetchDB()">
-    </form>
-</header>
+    <header>
+        <a href="">PlayStation® Network Database</a>
+        <div id="count" aria-live="polite" role="status">0 items shown</div>
+        <form name="engine" onsubmit="location.hash=query.value;render();return false">
+            <input type="search" name="query" size="25" placeholder="Search">
+            <input type="submit" name="send" value="Search" disabled>
+            <input type="button" name="fetch" value="Reload DB" onclick="fetchDB()">
+        </form>
+    </header>
 
-<div id="main" class="table">
-    <div class="sidebar table-cell" id="sidebar">
-        <ul id="letters">
-        </ul>
+    <div id="main" class="table">
+        <div class="sidebar table-cell" id="sidebar">
+            <ul id="letters"></ul>
+        </div>
+        <div class="content table-cell">
+            <ul id="list"></ul>
+        </div>
     </div>
-    <div class="content table-cell">
-        <ul id="list"></ul>
-    </div>
-</div>
 
-<script>
-    function sort(lines, algo) {
-        for (var i = 0; i < lines.length; i++) {
-            for (var j = 0; j < lines.length - i - 1; j++) {
-                if (algo(lines[j], lines[j + 1])) {
-                    var temp = lines[j];
-                    lines[j] = lines[j + 1];
-                    lines[j + 1] = temp;
+    <script>
+        function sort(lines, algo) {
+            for (var i = 0; i < lines.length; i++) {
+                for (var j = 0; j < lines.length - i - 1; j++) {
+                    if (algo(lines[j], lines[j + 1])) {
+                        var temp = lines[j];
+                        lines[j] = lines[j + 1];
+                        lines[j + 1] = temp;
+                    }
                 }
             }
-        }
-        return lines;
-    }
-
-    try {
-        var f = document.forms.engine;
-        var DB = window.localStorage ? JSON.parse(localStorage.DB || '[]') : [];
-
-        function makeRap(row) {
-            var hex = row[4];
-            if (!hex) return "";
-            if (hex == 0) return '<span>press Circle in ReactPSN</span>';
-            return '<a download="' + row[1] + '-' + row[0] + '_00-' + hex + '.rap" href="' + hex + '.rap">RAP</a>';
+            return lines;
         }
 
-        function fetchDB() {
-            f.fetch.disabled = true;
-            var xhr = new XMLHttpRequest();
-            xhr.onabort = xhr.ontimeout = xhr.onerror = alert;
-            xhr.onload = function () {
-                if (xhr.status != 200) return alert(xhr.status);
-                DB = xhr.responseText.split("\n");
-                for (var i = 0; i < DB.length; i++) DB[i] = DB[i].split(",");
-                if (window.localStorage) { localStorage.DB = JSON.stringify(DB); }
-                f.fetch.disabled = false;
-                render();
-            };
-            xhr.open('GET', 'db.csv');
-            xhr.send();
-        }
+        try {
+            var f = document.forms.engine;
+            var DB = window.localStorage ? JSON.parse(localStorage.DB || '[]') : [];
 
-        function render() {
-            f.fetch.type = window.localStorage ? 'button' : 'hidden';
-            f.send.disabled = DB.length == 0;
-            f.query.placeholder = DB.length + " URL loaded";
-            var query = decodeURIComponent(location.hash.replace(/^#+/, ''));
-            var startsWith = query.length && query[0] == '^';
-            var rule = new RegExp(query, 'i');
-            var matches = [];
-            for (var i = 0; i < DB.length && matches.length < (startsWith ? 999 : 99); i++) {
-                if (DB[i][5].match(rule) || (DB[i][0] == query))
-                    matches.push(DB[i]);
+            function makeRap(row) {
+                var hex = row[4];
+                if (!hex) return "";
+                if (hex == 0) return '<span>press Circle in ReactPSN</span>';
+                return '<a download="' + row[1] + '-' + row[0] + '_00-' + hex + '.rap" href="' + hex + '.rap">RAP</a>';
             }
-            sort(matches, function (a, b) { return a[5] > b[5]; });
-            for (var i = 0; i < matches.length; i++) {
-                var a = matches[i];
-                matches[i] = '<li><a href="http://zeus.dl.playstation.net/cdn/' + a[1] + '/' + a[0] + '_00/' + a[2] + '.pkg">' + a[5] + ' ' + (a[3]) + ' [' + a[0] + "]</a> " + makeRap(a) + "</li>";
-            }
-            document.getElementById('list').innerHTML = matches.join('');
-        }
 
-        var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()">[0-9]</a>';
-        for (var c = 65; c < 91; c++) {
-            links += '<a href="#" onclick="location.hash=\'^\'+this.innerHTML;render()">' + String.fromCharCode(c) + '</a>';
+            function fetchDB() {
+                f.fetch.disabled = true;
+                var xhr = new XMLHttpRequest();
+                xhr.onabort = xhr.ontimeout = xhr.onerror = function () {
+                    alert("Error loading DB");
+                    f.fetch.disabled = false;
+                };
+                xhr.onload = function () {
+                    if (xhr.status != 200) {
+                        alert("Status " + xhr.status);
+                        f.fetch.disabled = false;
+                        return;
+                    }
+                    DB = xhr.responseText.split("\n");
+                    for (var i = 0; i < DB.length; i++) DB[i] = DB[i].split(",");
+                    if (window.localStorage) {
+                        localStorage.DB = JSON.stringify(DB);
+                    }
+                    f.fetch.disabled = false;
+                    render();
+                };
+                xhr.open('GET', 'db.csv');
+                xhr.send();
+            }
+
+            function render() {
+                f.fetch.type = window.localStorage ? 'button' : 'hidden';
+                f.send.disabled = DB.length == 0;
+                f.query.placeholder = DB.length + " URL loaded";
+                var query = decodeURIComponent(location.hash.replace(/^#+/, ''));
+                var startsWith = query.length && query[0] == '^';
+                var rule = new RegExp(query, 'i');
+                var matches = [];
+                for (var i = 0; i < DB.length && matches.length < (startsWith ? 999 : 99); i++) {
+                    if (DB[i][5].match(rule) || (DB[i][0] == query))
+                        matches.push(DB[i]);
+                }
+                sort(matches, function (a, b) { return a[5] > b[5]; });
+                for (var i = 0; i < matches.length; i++) {
+                    var a = matches[i];
+                    matches[i] = '<li><a href="http://zeus.dl.playstation.net/cdn/' + a[1] + '/' + a[0] + '_00/' + a[2] + '.pkg">' + a[5] + ' ' + (a[3]) + ' [' + a[0] + "]</a> " + makeRap(a) + "</li>";
+                }
+                document.getElementById('list').innerHTML = matches.join('');
+
+                // Atualiza o contador exibido no header
+                document.getElementById('count').textContent = matches.length + " items shown";
+            }
+
+            var links = '<a href="#" onclick="location.hash=\'^[0-9]\';render()">[0-9]</a>';
+            for (var c = 65; c < 91; c++) {
+                links += '<a href="#" onclick="location.hash=\'^\'+this.innerHTML;render()">' + String.fromCharCode(c) + '</a>';
+            }
+            document.getElementById("letters").innerHTML = links;
+            f.query.value = location.hash.replace(/^#+/, '');
+            render();
+            if (!DB.length) {
+                fetchDB();
+            }
+        } catch (a) {
+            alert(a);
         }
-        document.getElementById("letters").innerHTML = links;
-        f.query.value = location.hash.replace(/^#+/, '');
-        render();
-        if (!DB.length) {
-            fetchDB();
-        }
-    } catch (a) {
-        alert(a);
-    }
-</script>
+    </script>
 </body>
+
 </html>
